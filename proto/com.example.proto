@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+
+package com.example.grpc;
+
+enum ErrorCode {
+  ERROR_UNSPECIFIED = 0;
+  INVALID_ARGUMENT_ERROR = 101;
+}
+
+message ErrorDetail {
+  int32 errorCode = 1;
+  string message = 2;
+  map<string, string> metadata = 3;
+}
+
+/** Echo service **/
+message EchoRequest {
+  string name = 1;
+}
+
+message EchoReply {
+  string message = 1;
+}
+
+service Echo {
+  rpc hello(EchoRequest) returns (EchoReply) {}
+}
